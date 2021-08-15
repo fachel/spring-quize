@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div align="center">
+    <h2>Создание вопроса:</h2>
+    <form method="post" action="/admin/saveQuestion" th:object="${question}">
+        <input type="hidden" th:field="*{id}" id="id"/>
+        <input th:type="hidden" th:name="survey_id" th:value="${survey_id}"/>
+        <br>
+        <br>
+        Текст <input type="text" th:field="*{text}" id="text"/>
+        <br>
+        <br>
+        Тип <input type="text" th:field="*{type}" id="type"/>
+        <br>
+        <br>
+        <input type="submit" value="save"/>
+    </form>
+    </div>
+</body>
+</html>

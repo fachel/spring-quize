@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div align="center">
+        <h2>Вопросы:</h2>
+        <div th:each="question, iState : ${questionList}" >
+            <form action="/user/question" method="post">
+                <input th:type="hidden" th:name="question_id" th:value="${question.id}"/>
+                <input th:type="hidden" th:name="user_id" th:value="${user_id}"/>
+                <input type="submit" th:value="${iState.index + 1 + ' вопрос'}"/>
+            </form>
+            <br>
+         </div>
+        <br>
+        <form action="/user" method="get">
+            <input th:type="hidden" th:name="user_id" th:value="${user_id}"/>
+            <input type="submit" value="список опросов"/>
+        </form>
+    </div>
+</body>
+</html>
+
+<!--    <div th:each="button: ${buttonList}" th:if="${button.type eq 'text'}">-->
+<!--        Ответ <input type="text" name="answ">-->
+<!--        -->
+<!--    </div>-->

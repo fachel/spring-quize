@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div align="center">
+        <form method="post" action="/user/saveAnswer">
+            <input th:type="hidden" th:name="user_id" th:value="${user_id}"/>
+            <input th:type="hidden" th:name="question_id" th:value="${question_id}"/>
+            <th:block th:switch="${type}">
+                <div th:case="'text'">
+                    <br th:text="${question}"/>
+                    <br>
+                    Ответ <input type="text" name="answ">
+                    <br>
+                </div>
+                <div th:case="'radiobutton'">
+                    <nobr th:text="${question}"/>
+                    <div th:each="var : ${answers}">
+                        <nobr th:text="${var}"/>
+                        <input type="radio" name="answ" th:value="${var}"/>
+                        <br>
+                    </div>
+                </div>
+                <div th:case="'checkbox'">
+                    <nobr th:text="${question}"/>
+                    <div th:each="var : ${answers}">
+                        <nobr th:text="${var}"/>
+                        <input type="checkbox" name="answ" th:value="${var}"/>
+                        <br>
+                    </div>
+                </div>
+            </th:block>
+            <br>
+            <input type="submit" value="сохранить ответ"/>
+        </form>
+    </div>
+</body>
+</html>

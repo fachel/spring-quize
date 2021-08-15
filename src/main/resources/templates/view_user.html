@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Список опросов:</h2>
+<br>
+<table width="900px">
+    <tr>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Начало</th>
+        <th>Конец</th>
+        <th>Действие</th>
+    </tr>
+    <tr th:each="survey: ${surveyList}">
+        <td th:text="${survey.name}"></td>
+        <td th:text="${survey.description}"></td>
+        <td th:text="${survey.start}"></td>
+        <td th:text="${survey.finish}"></td>
+        <td>
+            <form action="/user/survey" method="get">
+                <input type="hidden"  th:name="survey_id" th:value="${survey.id}"/>
+                <input type="hidden"  th:name="user_id" th:value="${user_id}"/>
+                <input type="submit" value="пройти"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<form action="/user/mySurveys" method="get">
+    <input type="hidden"  th:name="user_id" th:value="${user_id}"/>
+    <input type="submit" value="Пройденные опросы"/>
+</form>
+</body>
+</html>

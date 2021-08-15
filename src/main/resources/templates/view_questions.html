@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Список вопросов:</h2>
+<br>
+<table width="900px">
+    <tr>
+        <th>Текст</th>
+        <th>Тип</th>
+        <th>Действие</th>
+    </tr>
+    <tr th:each="question: ${questions}">
+        <td th:text="${question.text}"></td>
+        <td th:text="${question.type}"></td>
+        <td>
+            <form action="/admin/updateQuestion" method="post">
+                <input th:type="hidden" th:name="question_id" th:value="${question.id}"/>
+                <input type="hidden"  th:name="survey_id" th:value="${survey_id}"/>
+                <input type="submit" value="изменить"/>
+            </form>
+            <form action="/admin/deleteQuestion" method="get">
+                <input th:type="hidden" th:name="question_id" th:value="${question.id}"/>
+                <input th:type="hidden" th:name="survey_id" th:value="${survey_id}"/>
+                <input type="submit" value="удалить"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<form action="/admin/addQuestion" method="get">
+    <input th:type="hidden" th:name="survey_id" th:value="${survey_id}"/>
+    <input type="submit" value="Добавить вопрос"/>
+</form>
+<br>
+<br>
+<button type="button" onclick="window.location.href='/admin'">На главную</button>
+</body>
+</html>

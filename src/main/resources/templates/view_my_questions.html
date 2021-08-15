@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+    <h2>Ответы:</h2>
+    <table width="700px">
+        <tr>
+            <th>Название опроса</th>
+            <th>Вопрос</th>
+            <th>Ответ</th>
+        </tr>
+        <tr th:each="answer: ${questions}">
+            <td th:text="${survey_name}"></td>
+            <td th:text="${answer.getQuestion.getText}"></td>
+            <td th:text="${answer.answer}"></td>
+        </tr>
+    </table>
+    <br>
+    <form action="/user/mySurveys" method="get">
+        <input th:type="hidden" th:name="user_id" th:value="${user_id}"/>
+        <input type="submit" value="назад"/>
+    </form>
+</div>
+</body>
+</html>
