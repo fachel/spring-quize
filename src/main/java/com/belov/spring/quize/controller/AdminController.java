@@ -59,7 +59,6 @@ public class AdminController {
     @GetMapping("/admin/deleteSurvey")
     public String deleteSurvey(@RequestParam ("survey_id") int survey_id){
         Survey survey = surveyService.getSurveyById(survey_id);
-//        surveyService.deleteUserSurvey(user_id, survey_id);
         surveyService.delete(survey);
         return "redirect:/admin";
     }

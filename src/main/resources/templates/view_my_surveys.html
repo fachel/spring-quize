@@ -21,7 +21,7 @@
                 <td th:text="${survey.start}"></td>
                 <td th:text="${survey.finish}"></td>
                 <td>
-                    <form action="/user/myQuestions" method="get">
+                    <form action="/user/myAnswers" method="get">
                         <input th:type="hidden" th:name="user_id" th:value="${user_id}"/>
                         <input th:type="hidden" th:name="survey_id" th:value="${survey.id}"/>
                         <input type="submit" value="ответы"/>
