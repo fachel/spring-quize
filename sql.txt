@@ -1,0 +1,85 @@
+CREATE TABLE users (
+	id serial PRIMARY KEY,
+  username varchar(15),
+  password varchar(100),
+  enabled INT
+) ;
+
+CREATE TABLE authorities (
+	id serial PRIMARY KEY,
+	user_id int,
+	username varchar(15),
+	authority varchar(25),
+	FOREIGN KEY (user_id) REFERENCES users (id)
+) ;
+
+INSERT INTO users (username, password, enabled)
+VALUES
+	('dima', '{noop}dima', 1),
+	('elena', '{noop}elena', 1),
+	('ivan', '{noop}ivan', 1);
+    
+INSERT INTO authorities (user_id, username, authority)
+VALUES
+	(1, 'dima', 'ROLE_ADMIN'),
+	(2, 'elena', 'ROLE_USER'),
+    (3, 'ivan', 'ROLE_USER');
+	
+CREATE TABLE surveys (
+	id serial PRIMARY KEY,
+	start varchar(50),
+	finish varchar(50),
+	description varchar(100),
+	name varchar(30)
+) ;
+
+CREATE TABLE questions (
+	id serial PRIMARY KEY,
+	text varchar(100),
+	type varchar(50),
+	id_survey int,
+	FOREIGN KEY (id_survey) REFERENCES surveys (id)
+) ;
+
+CREATE TABLE answ_question (
+	id serial PRIMARY KEY,
+	question_id int,
+	answer varchar(100),
+	user_id int,
+	FOREIGN KEY (question_id) REFERENCES questions (id),
+	FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+CREATE TABLE user_survey (
+  user_id int NOT NULL,
+  survey_id int NOT NULL,
+  PRIMARY KEY (user_id, survey_id),
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (survey_id) REFERENCES surveys(id));
+
+INSERT INTO surveys (start, finish, description, name)
+VALUES
+	('2021-08-12 12:00', '2021-08-12 13:00', 'Опрос по разделу транспорт', 'Транспорт'),
+	('2021-08-12 12:00', '2021-08-12 13:00', 'Опрос по медицине', 'Медицина'),
+	('2021-08-12 12:00', '2021-08-12 13:00', 'Опрос по архитектуре', 'Архитектура');
+	
+INSERT INTO questions (text, type, id_survey)
+VALUES
+	('Какие маршруты в городе стоит добавить?', 'text', 1),
+	('Какие станции метро самые загруженные?', 'checkbox?выхино, арбатская, курская', 1),
+	('Какие ветки метро вам нравятся?', 'checkbox?красная,синяя,зеленая', 1),
+	('Какие больницы стоит отремонтировать?', 'checkbox?1,2,3', 2),
+	('Каких врачей не хватает в больницах?', 'checkbox?педиатр, кардиолог, лор', 2),
+	('Самый лучший врач в вашей больнице?', 'radiobutton?Иванов,Петров,Сидоров', 2),
+	('Что вам нравится в архитектуре города?', 'text', 3),
+	('Что вам не нравится в архитектуре города?', 'text', 3);
+
+
+
+
+	
+	
+	
+	
+	
+	
